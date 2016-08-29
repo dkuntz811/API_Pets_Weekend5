@@ -10,16 +10,19 @@
     <script type="text/javascript" src="/vendors/angular-route.min.js"></script>
     <script type="text/javascript" src="/scripts/ang_app.js"></script>
     <script type="text/javascript" src="/scripts/petscontroller.js"></script>
-    <script type="text/javascript" src="/scripts/dogcontroller.js"></script>
-    <script type="text/javascript" src="/scripts/randomcontroller.js"></script>
+    <script type="text/javascript" src="/scripts/favescontroller.js"></script>
+    <!-- <script type="text/javascript" src="/scripts/randomcontroller.js"></script> -->
+    <!-- <script type="text/javascript" src="./routes/favorites.js"></script> -->
 </head>
 <body ng-app="myApp">
     <header>Find Your Next Best Friend</header>
+    <div ng-controller="petsController">
     <div ng-include="'/views/partials/nav.html'">
 
 
     </div>
     <div ng-view></div>
+  </div>
 
 
       <!-- <div class="col-md-6">
@@ -30,7 +33,7 @@
           <li ng-repeat="breed in breeds">{{breed.$t}}</li>
         </ul>
       </div> -->
-        <footer>Make Sure to Select Your Favorites!</footer>
+        <footer>Give Your New Friend a Home!</footer>
     </div>
 
 </body>

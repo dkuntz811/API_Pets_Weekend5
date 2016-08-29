@@ -6,9 +6,9 @@ myApp.config(['$routeProvider', function ($routeProvider){
       templateUrl: "/views/partials/pets.html",
       controller: "petsController"
     }).
-    when("/dogs", {
-      templateUrl: "/views/partials/dogs.html",
-      controller: "dogController"
+    when("/faves", {
+      templateUrl: "/views/partials/faves.html",
+      controller: "favesController"
     }).
     when("/random", {
       templateUrl: "/views/partials/random.html",

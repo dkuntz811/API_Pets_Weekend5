@@ -1,0 +1,9 @@
+<div class="container" ng-controller="favesController">
+	<div class="col-md-6">
+		<h2>Animals in Favorites:</h2>
+		<button ng-click="deleteFavorites()">Delete Pet</button>
+		<h2>{{animal.name.$t}}</h2>
+	<img ng-src="{{animal.media.photos.photo[2].$t}}" />
+		<p>{{animal.description.$t}}</p>
+	</div>
+</div>

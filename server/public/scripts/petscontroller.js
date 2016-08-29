@@ -1,7 +1,9 @@
 myApp.controller('petsController', ['$scope', '$http', function ($scope, $http){
   var key = '0ef1af2b16ac6dd5c174186f2fb3f09d';
   var baseURL = 'http://api.petfinder.com/';
-  $scope.breed = '';
+
+  $scope.animal = [];
+  $scope.pets = {};
 
      //Types for options dropdown menu
   $scope.types = [
@@ -16,8 +18,6 @@ myApp.controller('petsController', ['$scope', '$http', function ($scope, $http){
     {type: "smallfurry", label: "Small & Furry Friends"}
 
   ];
-
-
 
   $scope.getRandomPet = function() {
     var query = 'pet.getRandom';
@@ -34,29 +34,29 @@ myApp.controller('petsController', ['$scope', '$http', function ($scope, $http){
       function(response) {
         console.log(response.data);
         $scope.animal = response.data.petfinder.pet;
-        // $scope.breed = $scope.animal.animal.$t;
-        // $scope.getBreeds();
+        // $scope.animal.push($scope.getRandom);
+
+        console.log('animals in', $scope.animal);
       }
     )
   }
 
-  $scope.getStartingPet = function() {
-  var query = 'pet.getRandom';
-  query += '?key=' + key;
-  //query += '&animal=' + $scope.selectedType;
-  query += '&output=basic';
-  query += '&format=json';
 
-  var request = baseURL + encodeURI(query) + '&callback=JSON_CALLBACK';
-  console.log(request);
-
-  $http.jsonp(request).then(
-    function(response) {
-      $scope.animal = response.data.petfinder.pet;
-    }
-  )
-}
 }]);
+
+
+// var connectionString = '';
+//
+// if(process.env.DATABASE_URL !== undefined) {
+//     connectionString = process.env.DATABASE_URL + 'ssl';
+// } else {
+//     connectionString = 'postgres://localhost:5432/omicron';
+// }
+//
+// module.exports = connectionString;
+//
+
+//
 
 // myApp.controller('APIController', ['$scope', '$http', function($scope, $http) {
 //
