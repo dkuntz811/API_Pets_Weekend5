@@ -1,0 +1,11 @@
+CREATE TABLE faves (
+  id SERIAL PRIMARY KEY,
+  pet_id varchar(8) NOT NULL,
+  pet_image_url varchar(255),
+  pet_name varchar(60),
+  pet_description varchar(100)
+);
+
+
+INSERT INTO faves(pet_id, pet_image_url, pet_name, pet_description, pet_image) ' +
+'VALUES($1, $2, $3, $4); ',

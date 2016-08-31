@@ -21,7 +21,7 @@ myApp.controller('favesController', ['$scope', '$http', function($scope, $http) 
         console.log(response.data);
         $scope.animal = response.data.petfinder.pet;
         $scope.breed = $scope.animal.animal.$t;
-      
+
       }
     )
   }
@@ -53,8 +53,8 @@ $scope.addtoFavorites = function () {
 
   console.log(currentPet);
 
-  $http.post('/pets', currentPet)
-    .then(function () {
+  $http.post('/favorites', currentPet)
+    .then(function (response) {
       console.log('POST /pets');
       getFavorites();
       console.log('currentPet', currentPet);

@@ -22,6 +22,7 @@ myApp.controller('petsController', ['$scope', '$http', function ($scope, $http){
   $scope.getRandomPet = function() {
     var query = 'pet.getRandom';
     query += '?key=' + key;
+    query += '&animal' + $scope.animal;
     // query += '&animal=cat';
     query += '&output=basic';
     query += '&format=json';

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var pg = require('pg');
 var connectionString = 'postgres://localhost:5432/omicron';
+var favorites = require('../routes/favorites');
 
 
 router.post('/', function (req, res){
@@ -14,9 +15,9 @@ router.post('/', function (req, res){
 		if (err) {
 			res.sendStatus(500);
 		}
-		client.query('INSERT INTO pets(id, pet_name, pet_description, pet_image) ' +
+		client.query('INSERT INTO faves(pet_id, pet_image_url, pet_name, pet_description, pet_image) ' +
 	                'VALUES($1, $2, $3, $4); ',
-								[id, pet_name, pet_description, pet_image],
+								[fave.petID, fave.name, fave.description, fave.image],
 							function (err, results){
 								done();
 								if (err) {

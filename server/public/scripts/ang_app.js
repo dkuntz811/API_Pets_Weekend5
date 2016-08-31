@@ -10,11 +10,7 @@ myApp.config(['$routeProvider', function ($routeProvider){
       templateUrl: "/views/partials/faves.html",
       controller: "favesController"
     }).
-    when("/random", {
-      templateUrl: "/views/partials/random.html",
-      controller: "randomController"
-    }).
     otherwise({
-      redirectTo: "/random"
+      redirectTo: "/pets"
     });
 }]);
