@@ -1,9 +1,11 @@
 myApp.controller('petsController', ['$scope', '$http', function ($scope, $http){
+  console.log('petsController working');
   var key = '0ef1af2b16ac6dd5c174186f2fb3f09d';
   var baseURL = 'http://api.petfinder.com/';
 
   $scope.animal = [];
   $scope.pets = {};
+  $scope.favCount = 0;
 
      //Types for options dropdown menu
   $scope.types = [
@@ -19,10 +21,12 @@ myApp.controller('petsController', ['$scope', '$http', function ($scope, $http){
 
   ];
 
+  updateFavCount();
+
   $scope.getRandomPet = function() {
     var query = 'pet.getRandom';
     query += '?key=' + key;
-    query += '&animal' + $scope.animal;
+    query += '&animal=' + $scope.animal;
     // query += '&animal=cat';
     query += '&output=basic';
     query += '&format=json';
@@ -37,47 +41,43 @@ myApp.controller('petsController', ['$scope', '$http', function ($scope, $http){
         $scope.animal = response.data.petfinder.pet;
         // $scope.animal.push($scope.getRandom);
 
-        console.log('animals in', $scope.animal);
+        console.log('animal in', $scope.animal);
       }
-    )
+    );
   }
 
+  $scope.addtoFavorites = function(){
+    var favorite = {
+      pet_id: $scope.pet.id.$t,
+      ped_name: $scope.pet.name.$t,
+      description: '',
+      image: ''
+
+    };
+    if($scope.pet.description.$t){
+      favorite.description = $scope.pet.description.$t.substring(0,100);
+    }
+    var photos = $scope.pet.media.photos;
+    if(photos != undefined){
+      favorite.image = photos.photo[0].$t;
+    }
+    console.log('new favorite:', favorite);
+
+    $http.post('/favorites', favorite).then(function(response){
+      if(reponse.status == 201) {
+        console.log('saved favorite');
+        updateFavCount();
+      } else{
+        console.log('error saving favorite');
+      }
+    });
+  }
+
+  function updateFavCount () {
+    $http.get('favorites/count').then(function(response){
+      console.log(response);
+      $scope.favCount = response.data.count;
+    });
+  }
 
 }]);
-
-
-// var connectionString = '';
-//
-// if(process.env.DATABASE_URL !== undefined) {
-//     connectionString = process.env.DATABASE_URL + 'ssl';
-// } else {
-//     connectionString = 'postgres://localhost:5432/omicron';
-// }
-//
-// module.exports = connectionString;
-//
-
-//
-
-// myApp.controller('APIController', ['$scope', '$http', function($scope, $http) {
-//
-
-//   $scope.getBreeds = function() {
-//     var query = 'breed.list';
-//     query += '?key=' + key;
-//     query += '&animal=' + $scope.breed.toLowerCase();
-//     query += '&format=json';
-//
-//     var request = baseURL + encodeURI(query) + '&callback=JSON_CALLBACK';
-//
-//     console.log(request);
-//
-//     $http.jsonp(request).then(
-//       function(response) {
-//         console.log('breeds: ', response.data);
-//         $scope.breeds = response.data.petfinder.breeds.breed;
-//       }
-//     )
-//   }
-//
-// }]);
