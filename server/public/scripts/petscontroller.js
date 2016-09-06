@@ -1,10 +1,10 @@
 myApp.controller('petsController', ['$scope', '$http', function ($scope, $http){
   console.log('petsController working');
-  var key = '0ef1af2b16ac6dd5c174186f2fb3f09d';
-  var baseURL = 'http://api.petfinder.com/';
+
 
   $scope.animal = [];
-  $scope.pets = {};
+  $scope.animalType='';
+  $scope.pet = {};
   $scope.favCount = 0;
 
      //Types for options dropdown menu
@@ -23,10 +23,18 @@ myApp.controller('petsController', ['$scope', '$http', function ($scope, $http){
 
   updateFavCount();
 
+  $scope.changeAnimal = function(){
+    if($scope.animalType != ''){
+      $scope.getRandomPet();
+    }
+  }
+
   $scope.getRandomPet = function() {
+    var key = '0ef1af2b16ac6dd5c174186f2fb3f09d';
+    var baseURL = 'http://api.petfinder.com/';
     var query = 'pet.getRandom';
     query += '?key=' + key;
-    query += '&animal=' + $scope.animal;
+    query += '&animal=' + $scope.animalType;
     // query += '&animal=cat';
     query += '&output=basic';
     query += '&format=json';
@@ -38,22 +46,27 @@ myApp.controller('petsController', ['$scope', '$http', function ($scope, $http){
     $http.jsonp(request).then(
       function(response) {
         console.log(response.data);
-        $scope.animal = response.data.petfinder.pet;
+        $scope.pet = response.data.petfinder.pet;
         // $scope.animal.push($scope.getRandom);
 
-        console.log('animal in', $scope.animal);
+        console.log('animal in', $scope.pet);
       }
     );
   }
 
-  $scope.addtoFavorites = function(){
+  $scope.addToFavorites = function(){
+    console.log('button clicked');
+    console.log('scope.pet ', $scope.pet);
     var favorite = {
       pet_id: $scope.pet.id.$t,
-      ped_name: $scope.pet.name.$t,
-      description: '',
-      image: ''
+      pet_image: '',
+      pet_name: $scope.pet.name.$t,
+      pet_description: '',
 
     };
+       console.log('favorite is', favorite);
+
+
     if($scope.pet.description.$t){
       favorite.description = $scope.pet.description.$t.substring(0,100);
     }
@@ -64,7 +77,7 @@ myApp.controller('petsController', ['$scope', '$http', function ($scope, $http){
     console.log('new favorite:', favorite);
 
     $http.post('/favorites', favorite).then(function(response){
-      if(reponse.status == 201) {
+      if(response.status == 201) {
         console.log('saved favorite');
         updateFavCount();
       } else{

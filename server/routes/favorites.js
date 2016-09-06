@@ -24,15 +24,15 @@ router.get('/count', function (req, res){
 
 router.post('/', function  (req, res){
   var favorite = req.body;
-  console.log('fav;', favorite);
+  console.log('fav:', favorite);
   pg.connect(connection, function(err, client, done){
     if(err){
       console.log('connection error', err);
     }
     client.query('INSERT INTO faves ' +
-  ' (pet_id, pet_image_url, pet_name, pet_description) ' +
+  ' (pet_id, pet_image_url, pet_name, pet_description)' +
   ' VALUES($1, $2, $3, $4)',
-    [favorite.petID, favorite.image, favorite.petName, favorite.description],
+    [favorite.pet_id, favorite.image, favorite.pet_name, favorite.description],
     function (err, result){
       done();
       if (err) {

@@ -7,6 +7,7 @@ var favorites = require('./routes/favorites');
 // Serve back static files
 // app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(express.static(path.join(__dirname, './public')));
 

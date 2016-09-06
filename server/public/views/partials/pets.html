@@ -1,13 +1,13 @@
 <div class="container">
 	<div class="col-md-6">
 		<h2>Select Your Pet Breeds</h2>
-		<button id = "faves" ng-click="addToFavorites()">Add Pet to Favorites</button>
+		<button class="btn btn-info" id = "faves" ng-click="addToFavorites()">Add Pet to Favorites</button>
 
 		<select class="btn btn-default dropdown-toggle btn-lg" ng-options="pet.label for pet in types" ng-change="getRandomPet()"  ng-model="selectedType"></select>
 
-		<h2>{{animal.name.$t}}</h2>
-		<img ng-src="{{animal.media.photos.photo[2].$t}}" />
-		<p>{{animal.description.$t}}</p>
+		<h2>{{pet.name.$t}}</h2>
+		<img ng-src="{{pet.media.photos.photo[2].$t}}" />
+		<p>{{pet.description.$t}}</p>
 
 	</div>
 </div>

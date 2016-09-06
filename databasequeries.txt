@@ -6,6 +6,6 @@ CREATE TABLE faves (
   pet_description varchar(100)
 );
 
+SELECT COUNT(id) as count FROM FAVES;
 
-INSERT INTO faves(pet_id, pet_image_url, pet_name, pet_description, pet_image) ' +
-'VALUES($1, $2, $3, $4); ',
+INSERT INTO faves(pet_id, pet_image_url, pet_name, pet_description);
