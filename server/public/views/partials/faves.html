@@ -1,15 +1,22 @@
 <div class="container">
 	<div class="col-md-6">
 		<h2>Animals in Favorites:</h2>
-		<button ng-click="deleteFavorites()">Delete Pet</button>
+	
 		<div>
 			<span> Favorite Count: {{favCount}}</span>
 		</div>
 
 		<h2>Favorite Pets</h2>
 		<div ng-repeat="fav in favorites">
+			<button ng-click="deleteFavorites(fav)">Delete Pet</button>
 
-			{{fav}}
+
+       <h4>{{fav.pet_name}}</h4><span>{{fav.pet.image.url}}</span>
+			 <p>{{fav.pet_description}}</p>
+
+		 </div>
+
+
 
 		</div>
 
