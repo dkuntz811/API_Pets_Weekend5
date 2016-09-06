@@ -2,8 +2,12 @@ myApp.controller('favesController', ['$scope', '$http', function($scope, $http){
   console.log('favesController is working');
 
   $scope.favorites = [];
-  console.log('$scope.favorites ', $scope.favorites);
+  console.log('$scope.fav ', $scope.favorites);
   $scope.favCount = '';
+
+  getFaves();
+
+
   function getFaves(){
     $http.get('/favorites').then(function(response){
       if(response.status == 200) {

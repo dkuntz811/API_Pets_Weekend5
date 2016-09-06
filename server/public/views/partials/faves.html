@@ -3,10 +3,15 @@
 		<h2>Animals in Favorites:</h2>
 		<button ng-click="deleteFavorites()">Delete Pet</button>
 		<div>
-			{{favCount}}
+			<span> Favorite Count: {{favCount}}</span>
 		</div>
-		<h2>{{pet.name.$t}}</h2>
-	<img ng-src="{{pet.media.photos.photo[2].$t}}" />
-		<p>{{pet.description.$t}}{{faves}}</p>
+
+		<h2>Favorite Pets</h2>
+		<div ng-repeat="fav in favorites">
+
+			{{fav}}
+
+		</div>
+
 	</div>
 </div>
